@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>وبلاگ</title>
+    <title>وبلاگ {{ $title ?? '' }}</title>
     <meta name="description"
           content="وب آموز وبسایت آموزش برنامه نویسی وب و موبایل ، جاوااسکریپت ، لاراول ، react ، آموزش node js با مجرب ترین مدرسین">
     <meta name="keywords"
@@ -22,7 +22,7 @@
         <div class="c-header__row ">
             <div class="c-header__right">
                 <div class="logo">
-                    <a href="" class="logo__img"></a>
+                    <a href="{{ route('landing') }}" class="logo__img"></a>
                 </div>
                 <div class="c-search width-100 ">
                     <form action="" class="c-search__form position-relative">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="c-button__login-regsiter">
                     <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
-                    <div><a class="c-button__link c-button--register" href="{{ route('login') }}">ثبت نام</a></div>
+                    <div><a class="c-button__link c-button--register" href="{{ route('register') }}">ثبت نام</a></div>
                 </div>
             </div>
         </div>
@@ -89,7 +89,8 @@
     </nav>
 </header>
 
-@yield('main')
+{{-- @yield('main') --}}
+{{ $slot }}
 
 <footer class="footer">
     <a href="" class="scroll-top"></a>

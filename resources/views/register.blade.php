@@ -1,6 +1,7 @@
-@extends('app')
-
-@section('main')
+<x-app-layout>
+    <x-slot name="title">     
+        - صفحه ثبت نام 
+     </x-slot>  
 
 <main class="bg--white">
     <div class="container">
@@ -28,5 +29,5 @@
         </div>
     </div>
 </main>
-    
-@endsection
+
+</x-app-layout>section

@@ -1,7 +1,8 @@
-@extends('app')
+<x-app-layout>
+<x-slot name="title">     
+   - صفحه ورود 
+</x-slot>    
 
-@section('main')
-    
 <main class="bg--white">
     <div class="container">
         <div class="sign-page">
@@ -29,4 +30,4 @@
     </div>
 </main>
 
-@endsection
+</x-app-layout>
