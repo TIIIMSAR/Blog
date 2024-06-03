@@ -13,6 +13,7 @@
     <link rel="canonical" href="{{ asset('/blog/https://webamooz.net') }}"/>
     <link rel="stylesheet" href="{{ asset('/blog/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('/blog/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/blog/panel/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/blog/css/responsive.css') }}" media="(max-width:991px)">
     <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">-->
 </head>
@@ -37,10 +38,36 @@
                     <div class="c-header__button-search "></div>
                     <div class="c-header__button-nav"></div>
                 </div>
+
+                @guest
                 <div class="c-button__login-regsiter">
                     <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
                     <div><a class="c-button__link c-button--register" href="{{ route('register') }}">ثبت نام</a></div>
                 </div>
+          
+                @else
+            <div style="width: 180px">          
+                <div class="dropdown-select wide" id="dropdown-user" onclick="toggleUserDropdown()" tabindex="0">
+                    <span class="current">
+                        {{ auth()->user()->name }}
+                    </span>
+                    <div class="list">
+                        <ul>
+                            <li class="option" data-value="0" data-display-text="">
+                                <a href="{{ route('profile') }}">پروفایل</a>
+                            </li>
+                            <li class="option " data-value="0" data-display-text="" onclick="logoutUser()">
+                                خروج
+                            </li>
+                        </ul>
+                        <form action="{{ route('logout') }}" method="POST" id="logout-form" >@csrf</form>
+                        
+                    </div>
+                </div>
+            </div>
+                @endguest
+
+            
             </div>
         </div>
     </div>
@@ -162,6 +189,15 @@
 <div class="overlay"></div>
 <script src="{{ asset('/blog/js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('/blog/js/js.js') }}"></script>
+<script>
+    function toggleUserDropdown(){
+        document.getElementById('dropdown-user').classList.toggle('open');
+    }
+
+    function logoutUser(){
+        document.getElementById('logout-form').submit();
+    }
+</script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>-->
 
 </body>
