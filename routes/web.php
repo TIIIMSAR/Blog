@@ -17,20 +17,8 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/dashboard', function () {
+    return view('layouts.navigation');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
-
-Route::get('/reset-password', function () {
-    return view('reset-password');
-})->name('reset-password');
-
-Route::get('/post', function () {
-    return view('post');
-})->name('post');
-
-
+require __DIR__.'/auth.php';
