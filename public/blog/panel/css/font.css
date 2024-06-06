@@ -36,10 +36,10 @@
     font-weight: normal;
     src: url('../fonts/iransans/eot/IRANSansWeb(FaNum).eot');
     src: url('../fonts/iransans/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'), url('../fonts/iransans/woff2/IRANSansWeb(FaNum).woff2') format('woff2'), url('../fonts/iransans/woff/IRANSansWeb(FaNum).woff') format('woff'), url('../fonts/iransans/ttf/IRANSansWeb(FaNum).ttf') format('truetype')
-}
-/* 
+} 
+
 @font-face {
     font-family: digikala;
     src: url('../fonts/digikala/digikala.eot');
     src: url('../fonts/digikala/digikala.eot?#iefix') format('embedded-opentype'), url('../fonts/digikala/digikala.woff2') format('woff2'), url('../fonts/digikala/digikala.woff') format('woff'), url('../fonts/digikala/digikala.ttf') format('truetype')
-} */
+}
