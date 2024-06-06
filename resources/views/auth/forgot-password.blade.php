@@ -17,6 +17,15 @@
                             font-weight: 400;
                             font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
                         @enderror
+                        @if (Session::has('status'))
+                            <p style="margin-bottom: 1rem;
+                            color: green;
+                            text-align: justify;
+                            font-weight: 400;
+                            font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                                {{ Session::get('status') }}
+                            </p>
+                        @endif
                     <button class="btn btn--blue btn--shadow-blue width-100 ">بازیابی</button>
                     <div class="sign-page__footer">
                         <span>کاربر جدید هستید؟</span>
