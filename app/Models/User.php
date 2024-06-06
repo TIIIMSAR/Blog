@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRoleIn()
+    {
+       if($this->role == 'user') return 'کابر عادی' ;
+       if($this->role == 'author') return 'نویسنده' ;
+       if($this->role == 'admin') return 'مدیر' ;
+    }
+    
 }

@@ -1,4 +1,5 @@
 * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0;
     margin: 0;
     border: 0;
@@ -381,7 +382,7 @@ textarea {
 
 .col-1, .col-2, .col-3, .col-4,
 .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-    width: 100%;
+    width: 10%;
 }
 
 .border-radius-40 {
@@ -710,7 +711,7 @@ textarea {
     width: 122px;
     height: 122px;
     cursor: pointer;
-    margin: 15px auto 50px;
+    margin: 15px auto 90px;
     border-radius: 50%;
 }
 
