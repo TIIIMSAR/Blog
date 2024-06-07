@@ -13,42 +13,26 @@
                     <div>
                         <input type="text" name="name" class="text text--right" placeholder="نام  و نام خانوادگی">
                         @error('name')
-                            <p style="margin-bottom: 1rem;
-                                    color: crimson;
-                                    text-align: justify;
-                                    font-weight: 400;
-                                    font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                            <p class=error>{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
                     <input type="text" name="mobile" class="text text--left" placeholder="شماره موبایل">
                         @error('mobile')
-                            <p style="margin-bottom: 1rem;
-                            color: crimson;
-                            text-align: justify;
-                            font-weight: 400;
-                            font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                     <input type="text" name="email" class="text text--left" placeholder="ایمیل">
                         @error('email')
-                            <p style="margin-bottom: 1rem;
-                            color: crimson;
-                            text-align: justify;
-                            font-weight: 400;
-                            font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <input type="password" name="password" class="text text--left" placeholder="رمز عبور">
                         @error('password')
-                            <p style="margin-bottom: 1rem;
-                            color: crimson;
-                            text-align: justify;
-                            font-weight: 400;
-                            font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>

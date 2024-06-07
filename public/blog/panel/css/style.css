@@ -1877,3 +1877,17 @@ span.tagRemove:hover {
 .notification__box .title__noti{
     padding: 15px 0;
 }
+.error{
+    margin-bottom: 1rem;
+    color: crimson;
+    text-align: justify;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.suc{
+    margin-bottom: 1rem;
+    color: green;
+    text-align: justify;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

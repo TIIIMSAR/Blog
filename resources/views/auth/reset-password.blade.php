@@ -15,30 +15,20 @@
     
                     <input type="text" name="email" class="text text--left" placeholder="ایمیل" value="{{ $request->email }}">
                     @error('email')
-                        <p style="margin-bottom: 1rem;
-                                color: #D8000C;
-                                text-align: right;"
-                        >
+                        <p class="error">
                             {{ $message }}
                         </p>
                     @enderror
     
                     <input type="password" name="password" class="text text--left" placeholder="رمز عبور جدید">
                     @error('password')
-                        <p style="margin-bottom: 1rem;
-                                color: #D8000C;
-                                text-align: right;"
-                        >
+                        <p class="error">
                             {{ $message }}
                         </p>
                     @enderror
                     <input type="password" name="password_confirmation" class="text text--left" placeholder="تایید رمز عبور">
                     @error('password_confirmation')
-                        <p style="margin-bottom: 1rem;
-                                color: #D8000C;
-                                text-align: right;"
-                        >
-                            {{ $message }}
+                        <p class="error" >  {{ $message }}
                         </p>
                     @enderror
     

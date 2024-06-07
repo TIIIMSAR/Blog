@@ -12,19 +12,11 @@
                     @csrf
                         <input type="text" name="email" class="text text--left" placeholder="شماره یا ایمیل">
                             @error('email')
-                                <p style="margin-bottom: 1rem;
-                                color: crimson;
-                                text-align: justify;
-                                font-weight: 400;
-                                font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                                <p class="error">{{ $message }}</p>
                             @enderror
                         <input type="password" name="password" class="text text--left" placeholder="رمز عبور">
                             @error('password')
-                                <p style="margin-bottom: 1rem;
-                                color: crimson;
-                                text-align: justify;
-                                font-weight: 400;
-                                font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                                <p class="error">{{ $message }}</p>
                             @enderror
                         <label class="checkbox text--right">
                             <input type="checkbox" name="remember" class="checkbox__filter" type="submit">

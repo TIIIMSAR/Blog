@@ -1041,3 +1041,17 @@ textarea {
     color: #fff !important;
     width: 75px;
 }
+.error{
+    margin-bottom: 1rem;
+    color: crimson;
+    text-align: justify;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.suc{
+    margin-bottom: 1rem;
+    color: green;
+    text-align: justify;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

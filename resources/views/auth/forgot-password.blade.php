@@ -11,18 +11,10 @@
                     @csrf
                     <input type="text" name="email" class="text text--left" placeholder="شماره یا ایمیل">
                         @error('email')
-                            <p style="margin-bottom: 1rem;
-                            color: crimson;
-                            text-align: justify;
-                            font-weight: 400;
-                            font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         @enderror
                         @if (Session::has('status'))
-                            <p style="margin-bottom: 1rem;
-                            color: green;
-                            text-align: justify;
-                            font-weight: 400;
-                            font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                            <p class="suc">
                                 {{ Session::get('status') }}
                             </p>
                         @endif
