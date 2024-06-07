@@ -18,7 +18,7 @@
             <input type="file" accept="image/*" class="hidden avatar-img__input">
             <div class="v-dialog__container" style="display: block;"></div>
             <div class="box__camera default__avatar"></div>
-        </div>
+        </div>            
         <span class="profile__name">کاربر : {{ auth()->user()->name}}</span>
         <span class="profile__name">نقش  : {{ auth()->user()->getRoleIn()  }}</span>
     </div>
@@ -47,7 +47,8 @@
     {{ $slot }}
 </div>
 
-</body>
 <script src="{{ asset('blog/panel/js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('blog/panel/js/js.js') }}"></script>
+{{ $scripts ?? '' }}
+</body>
 </html>
