@@ -51,4 +51,8 @@ class User extends Authenticatable
        if($this->role == 'admin') return 'مدیر' ;
     }
     
+    public function getCreatedAtInJalali()
+    {
+        return verta($this->created_at)->format('Y/m/d');
+    }
 }

@@ -25,27 +25,29 @@
                         <th>شناسه</th>
                         <th>نام و نام خانوادگی</th>
                         <th>ایمیل</th>
+                        <th>موبایل</th>
                         <th>سطح کاربری</th>
                         <th>تاریخ عضویت</th>
-                        <th>وضعیت حساب</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
+                        @foreach ($users as $user)
+                            
+                        
                     <tr role="row" class="">
-                        <td><a href="">1</a></td>
-                        <td><a href="">محمد نیکو</a></td>
-                        <td>programming@gmail.com</td>
-                        <td>کاربر عادی</td>
-                        <td>1399/11/11</td>
-                        <td class="text-success">تاییده شده</td>
+                        <td>{{ $user->id }}</a></td>
+                        <td>{{ $user->name }}</a></td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->mobile }}</td>
+                        <td>{{ $user->getRoleIn() }}</td>
+                        <td>{{ $user->getCreatedAtInJalali() }}</td>
                         <td>
                             <a href="" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="" class="item-confirm mlg-15" title="تایید"></a>
-                            <a href="" class="item-reject mlg-15" title="رد"></a>
-                            <a href="{{ route('users.edit', 1) }}" class="item-edit " title="ویرایش"></a>
+                            <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
                         </td>
                     </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
