@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Panel\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,7 @@ Route::get('/dashboard', function () {
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
+
+Route::resource('/panel/users', UserController::class)->except('show');
 
 require __DIR__.'/auth.php';

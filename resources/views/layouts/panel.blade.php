@@ -24,9 +24,9 @@
     </div>
 
     <ul>
-        <li class="item-li i-dashboard is-active"><a href="index.html">پیشخوان</a></li>
-        <li class="item-li i-users"><a href="users.html"> کاربران</a></li>
-        <li class="item-li i-categories"><a href="categories.html">دسته بندی ها</a></li>
+        <li class="item-li i-dashboard @if(request()->is('dashboard')) is-active  @endif "><a href="{{ route('dashboard') }}">پیشخوان</a></li>
+        <li class="item-li i-users @if(request()->is('panel.users') || request()->is('panel.users.*'))  is-active  @endif "><a href="{{ route('users.index') }}"> کاربران</a></li>
+        <li class="item-li i-categories "><a href="categories.html">دسته بندی ها</a></li>
         <li class="item-li i-articles"><a href="articles.html">مقالات</a></li>
         <li class="item-li i-comments"><a href="comments.html"> نظرات</a></li>
         <li class="item-li i-user__inforamtion"><a href="user-information.html">اطلاعات کاربری</a></li>
@@ -44,11 +44,9 @@
             <form action="{{ route('logout') }}" method="POST" id="logoute-form" >@csrf</form>
         </div>
     </div>
+    {{ $slot }}
 </div>
 
-{{ $slot }}
-
-</div>
 </body>
 <script src="{{ asset('blog/panel/js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('blog/panel/js/js.js') }}"></script>
