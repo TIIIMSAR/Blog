@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
     <title>پنل وبلاگ {{ $title ?? '' }}</title>
     <link rel="stylesheet" href="{{ asset('blog/panel/css/style.css') }}">
+    {{ $styles ?? '' }}
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_991.css') }}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_768.css') }}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/font.css') }}">

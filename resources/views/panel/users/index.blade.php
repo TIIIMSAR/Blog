@@ -2,6 +2,10 @@
     <x-slot name="title">
         - مدریت کاربران
     </x-slot>
+    <x-slot name="styles">
+        <link rel="stylesheet" href="{{ asset('blog/css/style.css') }}">
+    </x-slot>
+
     <p>
         <div class="breadcrumb">
             <ul>
@@ -35,7 +39,7 @@
                         @foreach ($users as $user)
                             
                         
-                    <tr role="row" class="">
+                        <tr role="row" class="">
                         <td>{{ $user->id }}</a></td>
                         <td>{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
@@ -43,7 +47,7 @@
                         <td>{{ $user->getRoleIn() }}</td>
                         <td>{{ $user->getCreatedAtInJalali() }}</td>
                         <td>
-                            @if (auth()->user()->id !== $user->id )
+                            @if (auth()->user()->id !== $user->id AND $user->role !== 'admin')
                             <a href="{{ route('users.destroy', $user->id) }}" onclick="destroyUser(event, {{ $user->id }})" class="item-delete mlg-15" title="حذف"></a>
                             @endif
                             <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
@@ -53,6 +57,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $users->links() }}
             </div>
         </div>
         <x-slot name="scripts">
