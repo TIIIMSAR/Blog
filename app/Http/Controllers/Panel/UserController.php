@@ -15,7 +15,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $users = User::paginate();
+        $users = User::paginate(7);
         return view('panel.users.index', compact('users'));
     }
 
@@ -28,11 +28,12 @@ class UserController extends Controller
 
     public function store(CreateUserRequest  $request)
     {
-
         $data = $request->validated();
         $data['password'] = Hash::make('password');
             User::create($data);
-        return redirect()->route('users.index');
+
+            $request->session()->flash('status', 'کاربر ایجاد شد!');
+            return redirect()->route('users.index');
 
     }
 
@@ -44,12 +45,16 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->only(['name', 'email', 'mobile', 'role']));
+
+        $request->session()->flash('status', 'اطلاعات کاربر با موفقیت ویرای  شد!');
+
         return redirect()->route('users.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(Request $request,User $user)
     {
         $user->delete();
+        $request->session()->flash('status', ' کاربر با موفقیت حذف شد!');
         return back();
     }
 }
