@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,10 @@ Route::get('/dashboard', function () {
     return view('panel.index');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/profile', function () {
+Route::middleware('auth')->get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::middleware('auth')->resource('/panel/users', UserController::class)->except('show');
+Route::middleware(['auth', 'admin'])->resource('/panel/users', UserController::class)->except('show');
 
 require __DIR__.'/auth.php';
