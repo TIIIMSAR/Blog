@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\CatagoryController;
+use App\Http\Controllers\Panel\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
 use GuzzleHttp\Middleware;
@@ -30,7 +31,7 @@ Route::middleware('auth')->get('/profile', function () {
 
 Route::middleware(['auth', 'admin'])->prefix('/panel')->group(function(){
     Route::resource('/users', UserController::class)->except('show');
-    Route::resource('/categories', CatagoryController::class)->except(['show', 'create', 'edit']);
+    Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
 });
 
 require __DIR__.'/auth.php';
