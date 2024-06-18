@@ -27,12 +27,12 @@ class CategoryController extends Controller
             $request->only(['name', 'slug', 'category_id'])
         );
             session()->flash('status', 'دسته بندی با موفقیت ایجاد شد!');
-                return back();
+            return back();
     }
 
     public function edit(Category $category)
     {
-        $parentCategories = Category::where('category_id', null)->get();
+        $parentCategories = Category::where('category_id', null)->where('id', '!=', $category->id)->get();
         return view('panel.categories.edit', compact('category', 'parentCategories'));
     }
 
@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $category->update(
             $request->only(['name', 'category_id'])
         );
-        session()->flush('status', 'دسته بندی اپدیت شد!');
+        session()->flash('status', 'دسته بندی اپدیت شد!');
             return redirect()->route('categories.index');
     }
 

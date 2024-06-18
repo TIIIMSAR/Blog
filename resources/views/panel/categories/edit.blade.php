@@ -24,8 +24,8 @@
 
                             <select class="select" name="category_id" id="category_id">
                                 <option value="">ندارد</option>
-                                  @foreach ($parentCategories as $category)
-                                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                  @foreach ($parentCategories as $parentCategory)
+                                  <option value="{{ $parentCategory->id }}" @if($parentCategory->id === $category->category_id) selected @endif>{{ $parentCategory->name }}</option>
                                   @endforeach
                             </select>
                                   @error('category_id')
