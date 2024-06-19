@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Panel;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Panel\Category\CategoryCreateRequest;
+use App\Http\Requests\Panel\Category\CategoryUpdeteRequest;
 
 class CategoryController extends Controller
 {
@@ -16,15 +18,10 @@ class CategoryController extends Controller
         return view('panel.categories.index', compact('categories', 'parentCategories'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:categories'],
-            'category_id' => ['nullable', 'exists:categories,id']
-        ]);
         Category::create(
-            $request->only(['name', 'slug', 'category_id'])
+            $request->validate()
         );
             session()->flash('status', 'دسته بندی با موفقیت ایجاد شد!');
             return back();
@@ -36,16 +33,10 @@ class CategoryController extends Controller
         return view('panel.categories.edit', compact('category', 'parentCategories'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdeteRequest $request, Category $category)
     {
-
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'category_id' => ['nullable', 'exists:categories,id']
-        ]);
-        
         $category->update(
-            $request->only(['name', 'category_id'])
+            $request->validated()
         );
         session()->flash('status', 'دسته بندی اپدیت شد!');
             return redirect()->route('categories.index');
