@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Panel\User\CreateUserRequest;
+use App\Http\Requests\Panel\User\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(7);
         return view('panel.users.index', compact('users'));
     }
 
@@ -25,19 +26,14 @@ class UserController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateUserRequest  $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255', 'unique:users'],
-            'mobile' => ['required', 'string', 'max:255', 'unique:users'],
-            'role' => ['required', 'max:255'], 
-        ]);
-
-        $data = $request->only(['name', 'email', 'mobile', 'role']);
+        $data = $request->validated();
         $data['password'] = Hash::make('password');
             User::create($data);
-        return redirect()->route('users.index');
+
+            $request->session()->flash('status', 'کاربر ایجاد شد!');
+            return redirect()->route('users.index');
 
     }
 
@@ -46,21 +42,19 @@ class UserController extends Controller
         return view('panel.users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'mobile' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'role' => ['required', 'max:255'], 
-        ]);
-
         $user->update($request->only(['name', 'email', 'mobile', 'role']));
+
+        $request->session()->flash('status', 'اطلاعات کاربر با موفقیت ویرای  شد!');
+
         return redirect()->route('users.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request,User $user)
     {
-    
+        $user->delete();
+        $request->session()->flash('status', ' کاربر با موفقیت حذف شد!');
+        return back();
     }
 }

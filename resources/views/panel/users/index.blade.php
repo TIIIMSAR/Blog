@@ -2,6 +2,10 @@
     <x-slot name="title">
         - مدریت کاربران
     </x-slot>
+    <x-slot name="styles">
+        <link rel="stylesheet" href="{{ asset('blog/css/style.css') }}">
+    </x-slot>
+
     <p>
         <div class="breadcrumb">
             <ul>
@@ -35,7 +39,7 @@
                         @foreach ($users as $user)
                             
                         
-                    <tr role="row" class="">
+                        <tr role="row" class="">
                         <td>{{ $user->id }}</a></td>
                         <td>{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
@@ -43,14 +47,43 @@
                         <td>{{ $user->getRoleIn() }}</td>
                         <td>{{ $user->getCreatedAtInJalali() }}</td>
                         <td>
-                            <a href="" class="item-delete mlg-15" title="حذف"></a>
+                            @if (auth()->user()->id !== $user->id AND $user->role !== 'admin')
+                            <a href="{{ route('users.destroy', $user->id) }}" onclick="destroyUser(event, {{ $user->id }})" class="item-delete mlg-15" title="حذف"></a>
+                            @endif
+
                             <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
+
+                            <form action="{{ route('users.destroy', $user->id) }}" id="destroy-user-{{ $user->id }}"  method="post">
+                                @csrf
+                                @method('delete')
+                            </form>
                         </td>
                     </tr>
                         @endforeach
                     </tbody>
                 </table>
+                {{ $users->links() }}
             </div>
         </div>
-    </p>
+        <x-slot name="scripts">
+            <script>
+          function destroyUser(event, id) {
+          event.preventDefault();
+          Swal.fire({
+          title: 'ایا مطمئن هستید این کار را میخواهید حذف کنید؟',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: 'rgb(221, 51, 51)',
+          cancelButtonColor: 'rgb(48, 133, 214)',
+          confirmButtonText: 'بله حذف کن!',
+          cancelButtonText: 'کنسل'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.getElementById(`destroy-user-${id}`).submit()
+          }
+        })
+        }
+            </script>
+            </p>
+        </x-slot>
 </x-panel-layout>

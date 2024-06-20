@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
     <title>پنل وبلاگ {{ $title ?? '' }}</title>
     <link rel="stylesheet" href="{{ asset('blog/panel/css/style.css') }}">
+    {{ $styles ?? '' }}
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_991.css') }}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_768.css') }}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/font.css') }}">
@@ -18,19 +19,27 @@
             <input type="file" accept="image/*" class="hidden avatar-img__input">
             <div class="v-dialog__container" style="display: block;"></div>
             <div class="box__camera default__avatar"></div>
-        </div>
+        </div>            
         <span class="profile__name">کاربر : {{ auth()->user()->name}}</span>
         <span class="profile__name">نقش  : {{ auth()->user()->getRoleIn()  }}</span>
     </div>
 
+    {{-- دسته بندی --}}
+
     <ul>
         <li class="item-li i-dashboard @if(request()->is('dashboard')) is-active  @endif "><a href="{{ route('dashboard') }}">پیشخوان</a></li>
+            @if (auth()->user()->role === 'admin')
         <li class="item-li i-users @if(request()->is('panel.users') || request()->is('panel.users.*'))  is-active  @endif "><a href="{{ route('users.index') }}"> کاربران</a></li>
-        <li class="item-li i-categories "><a href="categories.html">دسته بندی ها</a></li>
-        <li class="item-li i-articles"><a href="articles.html">مقالات</a></li>
+        <li class="item-li i-categories @if(request()->is('panel.categories') || request()->is('panel.categories.*'))  is-active  @endif "><a href="{{ route('categories.index') }}">دسته بندی ها</a></li>
+            @endif
+            @if (auth()->user()->role === 'admin' OR auth()->user()->role === 'author')
+        <li class="item-li i-articles"><a href="{{ route('posts.index') }}">مقالات</a></li>
+            @endif
         <li class="item-li i-comments"><a href="comments.html"> نظرات</a></li>
         <li class="item-li i-user__inforamtion"><a href="user-information.html">اطلاعات کاربری</a></li>
     </ul>
+
+
 
 </div>
 <div class="content">
@@ -46,8 +55,15 @@
     </div>
     {{ $slot }}
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(Session::has('status'))
+<script>
+    Swal.fire({ title: "{{ session('status') }}", confirmButtonText: 'تایید', icon: 'success' })
+</script>
+@endif
 
-</body>
 <script src="{{ asset('blog/panel/js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('blog/panel/js/js.js') }}"></script>
+{{ $scripts ?? '' }}
+</body>
 </html>
