@@ -24,9 +24,20 @@ class PostController extends Controller
   
     public function store(Request $request)
     {
+        $request->validate([
+            'categories' =>['required','array'],
+            'title' =>['required','string', 'max:255'],
+            'categories.*' =>['required','string'],
+            'banner' =>['required', 'image'],
+        ]);
         // dd($request->categories);    
         // dd($request->all());
         $categoriyIds = Category::whereIn('name', $request->categories)->get()->pluck('id')->toArray();
+        $file = $request->file('banner');
+        $file_name = $file->getClientOriginalName();
+
+        $file->storeAs('images/banners', $file_name, 'public_files');
+        return back();
     }
 
   
