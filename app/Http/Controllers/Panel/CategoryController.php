@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function store(CategoryCreateRequest $request)
     {
         Category::create(
-            $request->validate()
+            $request->validated()
         );
             session()->flash('status', 'دسته بندی با موفقیت ایجاد شد!');
             return back();

@@ -7,6 +7,9 @@ use App\Http\Controllers\Panel\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
 use GuzzleHttp\Middleware;
+use Whoops\Run;
+
+use function PHPUnit\Framework\any;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,8 @@ use GuzzleHttp\Middleware;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// test 
+// Route::
 
 Route::get('/', function () {
     return view('landing');

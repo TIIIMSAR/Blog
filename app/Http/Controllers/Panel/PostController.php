@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Panel\Post\CreatePostRequest;
 use App\Models\Category;
 
 class PostController extends Controller
@@ -22,22 +23,24 @@ class PostController extends Controller
     }
 
   
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        $request->validate([
-            'categories' =>['required','array'],
-            'title' =>['required','string', 'max:255'],
-            'categories.*' =>['required','string'],
-            'banner' =>['required', 'image'],
-        ]);
-        // dd($request->categories);    
-        // dd($request->all());
-        $categoriyIds = Category::whereIn('name', $request->categories)->get()->pluck('id')->toArray();
-        $file = $request->file('banner');
-        $file_name = $file->getClientOriginalName();
+        dd($request->all());
+        // categories
+        $categoriyIds = Category::whereIn('name', $request->categories)->get()->pluck('id')->toArray(); // whereIn : برای جستجو بین مقادیر ارایه 
+        // file
 
-        $file->storeAs('images/banners', $file_name, 'public_files');
-        return back();
+        $file = $request->file('banner');
+        $file_name = $file->getClientOriginalName(); // getClientOriginalName : نام اولیه فایل را برمیگردد
+        $file->storeAs('images/banners', $file_name, 'public_files' /*تعقیر دیسک پیش فرض*/); // storeAs : محل ذخیره شدن 
+        
+        // validate
+        Post::create(
+            $request->validated()
+        );
+
+        // redirect
+        return redirect()->route('posts.index');
     }
 
   

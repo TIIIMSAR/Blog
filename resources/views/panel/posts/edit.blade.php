@@ -1,7 +1,7 @@
 <x-panel-layout>
     
     <x-slot name="title">
-        - ساخت مقاله جدید
+        - ویرایش مقاله جدید
     </x-slot>
 
     <div class="breadcrumb">
@@ -47,6 +47,7 @@
 
     <x-slot name="scripts">
         <script src="{{ asset('blog/panel/js/tagsInput.js') }}"></script>
-    </x-slot>
+    </x-slot>   
 
+    
 </x-panel-layout>
