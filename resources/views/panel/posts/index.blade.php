@@ -45,26 +45,41 @@
                     <th>عنوان</th>
                     <th>نویسنده</th>
                     <th>متن</th>
-                    <th>تاریخ ایجاد</th>
                     <th>عملیات</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr role="row" class="">
-                    <td><a href="">1</a></td>
-                    <td><a href="">فریم ورک لاراول چیست</a></td>
-                    <td>توفیق حمزئی</td>
-                    <td>فریم ورک لاراول یکی از فریم ورک های محبوب ...</td>
-                    <td>1399/11/11</td>
+
+                    @foreach ($posts as $post)
+
+                    <tr role="row" class="">
+                    <td>{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->user->name }}</td>
+                    <td>{{ $post->getCreatedAtInJalali() }}</td>
                     <td>
-                        <a href="" class="item-delete mlg-15" title="حذف"></a>
+                        <a href="{{ route('posts.destroy', $post->id) }}" onclick="destroyPost(event, {{ $post->id }})" class="item-delete mlg-15" title="حذف"></a>
                         <a href="" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
-                        <a href="{{ route('posts.edit', 1) }}" class="item-edit" title="ویرایش"></a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="item-edit" title="ویرایش"></a>
+                        {{-- form DELETE--}} 
+                        <form action="{{ route('posts.destroy', $post->id) }}" id="destroy-post-{{ $post->id }}" method="POST">@csrf @method('DELETE')</form>
                     </td>
                 </tr>
-                </tbody>
+
+                @endforeach
+
+            </tbody>
             </table>
+            {{ $posts->links() }}
         </div>
     </div>
-
+    <x-slot name='scripts'>
+        <script>
+            function destroyPost(event, id)
+            {
+                event.preventDefault();
+                document.getElementById('destroy-post-' + id).submit();
+            }
+        </script>
+    </x-slot>
 </x-panel-layout>

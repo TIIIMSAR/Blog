@@ -29,19 +29,21 @@ Route::get('/', function () {
 })->name('landing');
 
 Route::get('/dashboard', function () {
-    return view('panel.index');
+    return view('/panel.index');
 })->middleware(['auth'])->name('dashboard');
 
-Route::middleware('auth')->get('/profile', function () {
+Route::get('/profile', function () {
     return view('profile');
-})->name('profile');
+})->middleware('auth')->name('profile');
 
 Route::middleware(['auth', 'admin'])->prefix('/panel')->group(function(){
     Route::resource('/users', UserController::class)->except('show');
     Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
     Route::resource('/posts', PostController::class)->except('show');
 });
-Route::post('/editor/upload', [EditorUploadController::class, 'upload'])
-            ->name('editor-upload');
+Route::middleware(['auth', 'author'])->prefix('/panel')->group(function(){
+    Route::resource('/posts', PostController::class)->except('show');
+    Route::post('/editor/upload', [EditorUploadController::class, 'upload'])->name('editor-upload');
+});
 
 require __DIR__.'/auth.php';
