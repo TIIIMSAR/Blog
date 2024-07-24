@@ -13,13 +13,23 @@ use Illuminate\Validation\ValidationException;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        if(auth()->user()->role == 'author')
-            $posts = Post::where('user_id', auth()->user()->id)->with('user')->paginate(7);
-        else
-            $posts = Post::with('user')->paginate(7);
+                //نویسنده ها فقط پست های خودشان را ببینند
+        if(auth()->user()->role == 'author'){
+            $postsQuery = Post::where('user_id', auth()->user()->id)->with('user');
+                // search
+                if($request->search)
+                    $postsQuery->where('title', 'LIKE', "%{$request->search}%");
+                
+            $posts = $postsQuery->paginate(7);
+        }else
+                // search
+            $postsQuery = Post::with('user');
+                if($request->search)
+                    $postsQuery->where('title', 'LIKE', "%{$request->search}%");
 
+            $posts = $postsQuery->paginate(7);
         return view('panel.posts.index', compact('posts'));
     }
 
