@@ -11,21 +11,28 @@
     <div class="main-content">
         <div class="row no-gutters font-size-13 margin-bottom-10" >
             <div class="col-3 padding-20 border-radius-3 bg-white margin-left-10 margin-bottom-10">
-                <p> تعداد کاربران </p>
-                <p>20 نفر</p>
-            </div>
-            <div class="col-3 padding-20 border-radius-3 bg-white margin-left-10 margin-bottom-10">
+
+                @if (auth()->user()->role == 'admin' OR auth()->user()->role == 'author')
                 <p>تعداد پست ها</p>
-                <p>20 پست</p>
+                <p>{{ $posts_count }} پست</p>
             </div>
             <div class="col-3 padding-20 border-radius-3 bg-white margin-left-10 margin-bottom-10">
                 <p>تعداد نظرات</p>
-                <p>300 نظر</p>
+                <p>{{ $comments_count }} نظر</p>
+            </div>
+            @endif
+            
+            @if (auth()->user()->role == 'admin')    
+            <div class="col-3 padding-20 border-radius-3 bg-white margin-left-10 margin-bottom-10">
+                <p> تعداد کاربران </p>
+                <p>{{ $users_count }} نفر</p>
             </div>
             <div class="col-3 padding-20 border-radius-3 bg-white  margin-bottom-10">
                 <p>تعداد دسته بندی ها</p>
-                <p>300 نظر</p>
+                <p>{{ $categories_count }} دسته بندی</p>
             </div>
+            @endif
+
         </div>
 
 
