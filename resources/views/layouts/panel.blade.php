@@ -15,7 +15,7 @@
     <span class="bars d-none padding-0-18"></span>
     <a class="header__logo  d-none" href="https://webamooz.net"></a>
     <div class="profile__info border cursor-pointer text-center">
-        <div class="avatar__img"><img src="{{ asset('blog/panel/img/pro.jpg') }}" class="avatar___img">
+        <div class="avatar__img"><img src="{{ auth()->user()->getProfileUrl() }}" class="avatar___img">
             <input type="file" accept="image/*" class="hidden avatar-img__input">
             <div class="v-dialog__container" style="display: block;"></div>
             <div class="box__camera default__avatar"></div>
@@ -39,9 +39,9 @@
             @endif
                 {{-- کامنت --}}
             @if (auth()->user()->role === 'admin')
-        <li class="item-li i-comments @if(request()->is('panel.commets') || request()->is('panel.commets.*'))  is-active  @endif"><a href="{{ route('comments.index') }}"> نظرات</a></li>
+        <li class="item-li i-comments @if(request()->is('panel.comments') || request()->is('panel.comments.*'))  is-active  @endif"><a href="{{ route('comments.index') }}"> نظرات</a></li>
             @endif
-        <li class="item-li i-user__inforamtion"><a href="user-information.html">اطلاعات کاربری</a></li>
+        <li class="item-li i-user__inforamtion @if(request()->is('profile') || request()->is('profile*'))  is-active  @endif"><a href="{{ route('profile') }}">اطلاعات کاربری</a></li>
     </ul>
 
 

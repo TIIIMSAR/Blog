@@ -35,7 +35,8 @@ Route::get('/dashboard', function () {
     return view('/panel.index');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::put('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
 
 Route::middleware(['auth', 'admin'])->prefix('/panel')->group(function(){
     Route::resource('/users', UserController::class)->except('show');
