@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Panel\CatagoryController;
 use App\Http\Controllers\Panel\CategoryController;
+use App\Http\Controllers\Panel\CommentController;
+use App\Http\Controllers\Panel\CommetController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\PostController;
+use App\Http\Controllers\Panel\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
 use GuzzleHttp\Middleware;
@@ -32,17 +35,17 @@ Route::get('/dashboard', function () {
     return view('/panel.index');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->middleware('auth')->name('profile');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 
 Route::middleware(['auth', 'admin'])->prefix('/panel')->group(function(){
     Route::resource('/users', UserController::class)->except('show');
     Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
-    Route::resource('/posts', PostController::class)->except('show');
-});
+        Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+        Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+        Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    });
 Route::middleware(['auth', 'author'])->prefix('/panel')->group(function(){
-    Route::resource('/posts', PostController::class)->except('show');
+    Route::resource('/posts', PostController::class)->except('show');   
     Route::post('/editor/upload', [EditorUploadController::class, 'upload'])->name('editor-upload');
 });
 
