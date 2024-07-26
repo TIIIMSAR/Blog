@@ -13,14 +13,18 @@
             </div>
             <div class="single-page__title">
                 <h1 class="single-page__h1">{{ $post->title }} </h1>
-                <span class="single-page__like"></span>
+                        
+                        @auth
+                <span class="single-page__like @if($post->is_user_liked) single-page__like--is-active  @endif"></span>
+                        @endauth
+                        
             </div>
             <div class="single-page__details">
                 <div class="single-page__author">نویسنده :{{ $post->user->name }}</div>
                 <div class="single-page__date">تاریخ : {{ $post->getCreatedAtInJalali() }}</div>
             </div>
             <div class="single-page__img">
-                <img class="single-page__img-src" src="{{ $post->getBannerUrl() }}}" alt="">
+                <img class="single-page__img-src" src="{{ $post->getBannerUrl() }}" alt="">
             </div>
             <div class="single-page__content">
                 {!! $post->content !!}
@@ -57,6 +61,7 @@
                         <form action="{{ route('comment.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="comment_id" value="" id="repliy-input">
                             <textarea class="comments__textarea" name="content" placeholder="بنویسید"></textarea>
                             <button class="btn btn--blue btn--shadow-blue">ارسال نظر</button>
                             <button class="btn btn--red btn--shadow-red">انصراف</button>
@@ -74,4 +79,27 @@
             </div>
         </div>
     </main>
+
+    <x-slot name='scripts'>
+        <script>
+
+            function setReplyValue(id)
+            {
+                document.getElementById('repliy-input').value = id;  
+            }
+
+            $(".single-page__like").on("click", function () {
+                fetch('{{ route("like.post", $post->slug) }}', {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-Token': '{{ csrf_token() }}'
+                    }
+                }).then( () => {
+                    $(this).toggleClass("single-page__like--is-active");
+                } )
+            })
+            
+        </script>
+    </x-slot>
+
     </x-app-layout>

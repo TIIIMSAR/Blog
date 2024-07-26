@@ -51,7 +51,6 @@
                             <td class="{{ $comment->is_approved ? 'text-success' : 'text-error' }}">{{ $comment->getStatusInFarsy() }}</td>
                         <td>
                             <a href="{{ route('comments.destroy', $comment->id) }}" onclick="destroycomment(event, {{ $comment->id }})" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
                                 @if ($comment->is_approved)
                             <a href="{{ route('comments.update', $comment->id) }}" onclick="updatecomment(event, {{ $comment->id }})" class="item-reject mlg-15" title="رد"></a>
                                 @else
@@ -85,5 +84,7 @@
             }
         </script>
     </x-slot>
+
+    {{ $commentsappends(request()->query())->links() }}
 
 </x-panel-layout>

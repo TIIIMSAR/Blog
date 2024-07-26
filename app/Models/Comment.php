@@ -13,13 +13,13 @@ class Comment extends Model
 
     protected $fillable = [
         'user_id',
-        'commet_id',
+        'comment_id',
         'post_id',
         'content',
         'is_approved',
     ];
 
-    protected $with = ['replies'];
+    protected $with = ['approvedReplies'];
     
         public function user()
         {
@@ -37,6 +37,11 @@ class Comment extends Model
             return $this->hasMany(Comment::class);
         }
 
+        public function approvedReplies()
+        {
+            return $this->replies()->where('is_approved', true);
+        }
+        
         public function getCreatedAtInJalali()
         {   
             return verta($this->created_at)->format('Y/m/d');
