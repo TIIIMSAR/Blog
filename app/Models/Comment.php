@@ -18,6 +18,8 @@ class Comment extends Model
         'content',
         'is_approved',
     ];
+
+    protected $with = ['replies'];
     
         public function user()
         {
