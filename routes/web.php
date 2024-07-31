@@ -12,6 +12,7 @@ use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\SearchPostController;
 use App\Http\Controllers\ShowPostCategory;
 use App\Http\Controllers\ShowPostController;
 use GuzzleHttp\Middleware;
@@ -37,6 +38,7 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/post/{post:slug}',[ShowPostController::class, 'show'])->name('post.show');
+Route::get('/search',[SearchPostController::class, 'show'])->name('post.search');
 Route::get('/category/{category:slug}', [ShowPostCategory::class, 'show'])->name('category.show'); 
 
 Route::post('/comment',[StoreCommentController::class, 'store'])->middleware('auth')->name('comment.store');

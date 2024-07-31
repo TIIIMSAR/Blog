@@ -25,12 +25,15 @@
                 <div class="logo">
                     <a href="{{ route('landing') }}" class="logo__img"></a>
                 </div>
+
+                        {{-- search --}}
                 <div class="c-search width-100 ">
-                    <form action="" class="c-search__form position-relative">
-                        <input type="text" class="c-search__input" placeholder="جستجو کنید">
+                    <form action="{{ route('post.search') }}" class="c-search__form position-relative">
+                        <input type="text" name="search" class="c-search__input" placeholder="جستجو کنید" value="{{ request()->search ?? '' }}">
                         <button class="c-search__button"></button>
                     </form>
                 </div>
+
 
             </div>
             <div class="c-header__left">
@@ -78,7 +81,7 @@
         </div>
         <div class="container container--nav">
             <ul class="nav__ul">
-                <li class="nav__item"><a href="#" class="{{ route('landing') }}">صفحه اصلی</a></li>
+                <li class="nav__item"><a href="{{ route('landing') }}" class="">صفحه اصلی</a></li>
 
 
                     @foreach ($categories as $category)    

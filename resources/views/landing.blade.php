@@ -29,7 +29,7 @@
             
             </div>
         </article>
-            {{ $posts->links() }}
+            {{ $posts->appends(request()->query())->links() }}
     </main>
     
 
