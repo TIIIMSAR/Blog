@@ -82,14 +82,15 @@
 
 
                     @foreach ($categories as $category)    
-                <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">{{ $category->name }}</a>
+                <li class="nav__item nav__item--has-sub"><a href="{{ route('category.show', $category->slug) }}" class="nav__link">{{ $category->name }}</a>
                     <div class="nav__sub">
                         <div class="container d-flex item-center flex-wrap container--nav">
 
                             @foreach ($category->children as $categoryChild)
-                            <a href="" class="nav__link">{{ $categoryChild->name }}</a>
+                            <a href="{{ route('category.show', $categoryChild->slug) }}" class="nav__link">{{ $categoryChild->name }}</a>
                             @endforeach
 
+                            
                         </div>
                     </div>
                 </li>
