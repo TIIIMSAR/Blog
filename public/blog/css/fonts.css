@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: irs;
     font-style: normal;
     font-weight: bold;
@@ -42,4 +42,15 @@
     font-family: fonticon;
     src: url('../fonts/fonticon/fonticon.eot');
     src: url('../fonts/fonticon/fonticon.eot?#iefix') format('embedded-opentype'), url('../fonts/fonticon/fonticon.woff2') format('woff2'), url('../fonts/fonticon/fonticon.woff') format('woff'), url('../fonts/fonticon/fonticon.ttf') format('truetype')
+} */
+
+
+@font-face {
+    font-family: irs;
+    src: url('../fonts/iransans/eot/IRANSansWeb\(FaNum\)_Medium.eot');
+}
+
+@font-face {
+    font-family: fonticon;
+    src: url('../fonts/fonticon.eot');
 }
